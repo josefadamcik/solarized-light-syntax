@@ -1,0 +1,266 @@
+// Support for extended markdown styling
+// https://atom.io/packages/language-markdown
+
+@_background:     @base03;
+@_text:           @base00;
+@_syntax:         @base00;
+@_syntax_alt:     @base01;
+@_content:        @base00;
+@_variable:       @syntax-color-variable;
+@_constant:       @syntax-color-constant;
+@_highlight:      @base01;
+@_comment:        @base1;
+@_neutral:        @base00;
+
+// Define custom markdown styles
+// ----------------------------------------
+
+.syntax--text.syntax--md {
+  .syntax--md {
+    &.syntax--heading {
+      font-weight: bold;
+      &.syntax--empty {
+        .syntax--punctuation {
+          opacity: 1;
+        }
+      }
+
+      .syntax--emphasis {
+        opacity: 1;
+        font-weight: normal;
+      }
+    }
+
+    &.syntax--hr {}
+    &.syntax--quote {
+      font-style: italic;
+      > .syntax--punctuation {
+        font-weight: bold;
+      }
+    }
+
+    &.syntax--link {
+      &.syntax--text {}
+      &.syntax--destination {
+        .syntax--uri {
+          text-decoration: underline;
+        }
+      }
+      &.syntax--title {
+        color: @_syntax_alt;
+        font-style: italic;
+      }
+      &.syntax--string {
+        background: fade(@_content, 5%);
+      }
+    }
+
+    &.syntax--gfm {}
+
+    &.syntax--reference {
+      &.syntax--class {
+        font-weight: normal;
+      }
+      &.syntax--link {
+        color: @_syntax;
+      }
+    }
+
+    &.syntax--link {
+      &.syntax--auto,
+      &.syntax--destination {
+        color: @_syntax;
+      }
+
+      &.syntax--content.syntax--block {
+        background: fade(@_variable, 10%);
+      }
+    }
+
+    &.syntax--list {
+      > .syntax--punctuation {
+        opacity: 1;
+        color: @_syntax_alt;
+        font-weight: bold;
+
+        .syntax--checkbox {
+          color: @_syntax_alt;
+          background: fade(@_syntax_alt, 5%);
+          font-weight: bold;
+        }
+      }
+
+      &.syntax--unordered,
+      &.syntax--ordered {}
+
+      &.syntax--task {
+        &.syntax--completed {
+          color: @_text;
+          opacity: 0.333;
+
+          & > .syntax--punctuation {
+            color: @_text;
+            opacity: 0.667;
+            font-weight: normal;
+          }
+
+          .syntax--code {
+            background: transparent;
+            color: @_text;
+          }
+
+          .syntax--comment,
+          .syntax--strike,
+          .syntax--reference,
+          .syntax--link,
+          .syntax--constant,
+          .syntax--emphasis,
+          .syntax--heading,
+          .syntax--quote,
+          .syntax--todo,
+          .syntax--review {
+            opacity: 1;
+            color: inherit;
+            font-weight: normal;
+
+            .syntax--punctuation {
+              opacity: 1;
+            }
+          }
+
+          .syntax--strike,
+          .syntax--underline {
+            text-decoration: none;
+          }
+
+          .syntax--fixme {
+            background: transparent;
+            outline: none;
+            color: inherit;
+          }
+        }
+      }
+
+      &.syntax--empty {
+        .syntax--punctuation {
+          color: @_syntax;
+        }
+      }
+    }
+
+    &.syntax--code {
+      &:not(.syntax--fenced) {
+        background: fade(@_neutral, 10%);
+      }
+
+      &.syntax--fenced {
+        color: @_neutral;
+        background: fade(@_neutral, 10%);
+        &.syntax--info {}
+
+        .syntax--embedded.syntax--source {
+          color: @_text;
+        }
+
+        .line.code-block & {
+          background: transparent;
+        }
+      }
+    }
+
+    &.syntax--math {
+      background: fade(@_neutral, 10%);
+
+      .line.code-block & {
+        background: transparent;
+      }
+    }
+
+    &.syntax--constant {
+      &.syntax--language {}
+    }
+
+    &.syntax--emphasis {
+      &:not(.syntax--strong) {
+        // opacity: 0.75;
+        color: @_syntax;
+      }
+
+      &:not(.syntax--strong) .syntax--strong {
+        font-style: italic;
+      }
+
+      .syntax--punctuation {
+        opacity: 1;
+      }
+    }
+
+    &.syntax--strong {}
+
+    &.syntax--table {
+      color: @_syntax_alt;
+
+      > .syntax--punctuation {
+        opacity: 0.5;
+
+        &.syntax--alignment {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.syntax--strike {
+      opacity: 0.5;
+    }
+
+    &.syntax--critic {
+      &.syntax--addition {}
+      &.syntax--deletion {}
+      &.syntax--comment {
+        font-style: normal;
+      }
+      &.syntax--substitution {}
+    }
+
+    &.syntax--special-attributes {}
+
+    &.syntax--attribute {
+      &.syntax--special {
+        &.syntax--other {
+          color: inherit;
+        }
+
+        &.syntax--id {
+          font-weight: bold;
+        }
+
+        &.syntax--class {
+          font-weight: normal;
+        }
+      }
+      .syntax--value {
+        &.syntax--storage {
+          color: @_syntax_alt;
+        }
+      }
+    }
+
+    // TODO, FIXME, etc.
+    &.syntax--type {
+      &.syntax--bug,
+      &.syntax--changed,
+      &.syntax--fixme,
+      &.syntax--idea,
+      &.syntax--nb,
+      &.syntax--note,
+      &.syntax--xxx,
+      &.syntax--hack,
+      &.syntax--review,
+      &.syntax--todo,
+      &.syntax--review,
+      &.syntax--hack {
+        color: inherit;
+      }
+    }
+  }
+}
